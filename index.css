@@ -9,6 +9,9 @@
 --dark-cyan: 6, 144, 143;
 --minion-yellow: 253, 231, 76;
 }
+a{
+    text-decoration: none;
+}
 
 
 html{
@@ -91,8 +94,6 @@ body{
     text-align: center;    
 }
 
-.treeicon{
-    
-}
+
 
 
