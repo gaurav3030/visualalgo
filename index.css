@@ -1,0 +1,94 @@
+
+:root {
+
+
+/* CSS HSL */
+--rich-black-fogra-29: 13, 24, 33;
+--non-photo-blue: 193, 238, 255;
+--blue-crayola: 0, 117, 242;
+--dark-cyan: 6, 144, 143;
+--minion-yellow: 253, 231, 76;
+}
+
+
+html{
+    font-family: sans-serif;
+}
+
+body{
+    margin: 0px;
+    height: 100vh;
+    background-color: rgb(var(--non-photo-blue));
+    
+}
+
+.header{
+    display: flex;
+    justify-content: center;
+     align-items: center;
+    height: 10vh;
+    color: white;
+    background-color:rgb(var(--blue-crayola));
+    box-shadow: 0px 10px 2px rgb(var(--blue-crayola),0.2);
+    
+}
+
+.header p{
+    margin: 0px;
+    font-size: 2em;
+    font-weight: 700;
+}
+/* banner */
+
+.banner{
+    display: flex;
+    
+     align-items: center;
+    margin: 0px;
+    padding: 5vw;
+}
+.banner p{
+    display: inline-block;
+    width: 50%;
+    font-size: 5vw;
+    justify-content: left;
+    font-weight: 600;
+}
+/* options */
+
+.oplist{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100vw;
+    background-color: white;
+    padding: 10px 0px;
+    box-shadow: 0px -10px 5px rgb(60,60,60,0.4);
+}
+
+.option{
+    width: 200px;
+    margin: 20px;
+    background-color: rgb(var(--rich-black-fogra-29));
+    color: white;
+    border-radius: 5px;
+    padding: 15px;
+    transition: 1s;
+    box-shadow: 5px 5px 5px rgb(var(--rich-black-fogra-29),0.4);
+    
+}
+.option:hover {
+    box-shadow: 0px 0px 5px rgb(var(--rich-black-fogra-29),0.2);
+}
+.option i{
+    display: block;
+    font-size: 3em;
+    text-align: center;    
+}
+.option p{
+    font-size: 1em;
+    text-align: center;    
+}
+
+
