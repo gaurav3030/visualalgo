@@ -105,6 +105,7 @@ body{
     background-color:white;
     height: inherit;
     border-radius: 10px;
+    
 
 }
 
@@ -113,10 +114,12 @@ body{
     height: inherit;
     background-color: rgb(var(--rich-black-fogra-29));
     border-radius: 10px 0px 0px 10px;
+    display: inline-block;
 }
 .opt{
     text-align:center ;
     padding: 10px 0 ;
+    color: white;
 }
 .sortsetting hr{
     width: 80%;
@@ -124,7 +127,7 @@ body{
     border-width: 0 0 1px 0;
 }
 .opt p{
-    color: white;
+    
     margin: 10px auto;
 }
 .dropbtn {
@@ -158,7 +161,7 @@ body{
   }
   
   .dropdown-content p {
-    color: #000;
+    
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -215,6 +218,11 @@ body{
     width: 18px;
     background-color: rgb(var(--blue-crayola));
 }
+.cent{
+    width: 80%;
+    display: block;
+    margin: auto;
+}
 .box{
     height: 20px;
     width: 20px;
@@ -233,6 +241,18 @@ body{
     
 }
 
+
+.Startbtn{
+    background-color:rgb(var(--minion-yellow));
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: 95%;
+    border-radius: 5px;
+    outline: none;
+}
 
 
 
