@@ -22,6 +22,23 @@ slider.oninput = function(){
     boxp.textContent = this.value;
     slider.style.background = "-webkit-linear-gradient(left,rgb(var(--blue-crayola)) "+x+"%, rgba(var(--rich-black-fogra-29),0.2) "+x+"%)";
 }
+function cratebargraph(array,N){
+    var pdiv = document.querySelector(".sortgraph")
+    for(var i=1;i<N;i++){
+        var val = 100-((array[i])*100/N);
+        var wid = 90/N;
+        console.log(i + " " + array[i])
+        var div = document.createElement('div');
+        div.setAttribute('id', "val"+i);
+        div.classList.add("bar");
+        
+        div.style.background ="-webkit-linear-gradient(top,rgba(0,0,0,0) "+val+"%, rgb(var(--blue-crayola)) "+val+"%)";
+        
+        pdiv.appendChild(div);
+        document.getElementById("val"+i).style.width=wid+'%';
+
+    }
+}
 
 function shuffle(array) {
     var currentIndex = array.length, temp, randomIndex;
@@ -39,12 +56,34 @@ function shuffle(array) {
   
     return array;
   }
+  var arr = [];
+for (var i = 1; i <= 50; i++) {
+    arr.push(i);
+}
+arr= shuffle(arr); 
+console.log(arr);
+cratebargraph(arr,50);
 document.querySelector(".Startbtn").addEventListener("click",function(){
-    var arr = [];
-    var N = slider.value;
-    for (var i = 1; i <= N; i++) {
-        arr.push(i);
-    }
-    arr= shuffle(arr);
+
+    
+     var N = slider.value;
+     if(N==50){
+
+
+     }else{
+        var myNode = document.querySelector(".sortgraph")
+        while (myNode.firstChild) {
+          myNode.removeChild(myNode.lastChild);
+        }
+        arr =[];
+        for (var i = 1; i <= N; i++) {
+            arr.push(i);
+        }
+        arr= shuffle(arr);
+        console.log(arr);
+        cratebargraph(arr,N);
+
+     }
+     
     
 });

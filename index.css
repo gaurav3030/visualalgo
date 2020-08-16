@@ -114,7 +114,7 @@ body{
     height: inherit;
     background-color: rgb(var(--rich-black-fogra-29));
     border-radius: 10px 0px 0px 10px;
-    display: inline-block;
+    float: left;
 }
 .opt{
     text-align:center ;
@@ -253,6 +253,28 @@ body{
     border-radius: 5px;
     outline: none;
 }
+
+
+.sortgraph{
+    float: left;
+    height: 90vh;
+   
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px 0px;
+    
+}
+
+.bar{
+    height: 100%;
+    
+    background-color: #f9f9f9;
+    
+}
+
 
 
 
