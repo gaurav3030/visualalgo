@@ -33,8 +33,11 @@ slider.oninput = function(){
     boxp.textContent = this.value;
     slider.style.background = "-webkit-linear-gradient(left,rgb(var(--blue-crayola)) "+x+"%, rgba(var(--rich-black-fogra-29),0.2) "+x+"%)";
 }
+
+
+
 function cratebargraph(array,N){
-    var pdiv = document.querySelector(".sortgraph")
+    var pdiv = document.querySelector(".sortgraph");
     for(var i=1;i<=N;i++){
         var val = 100-((array[i-1])*100/N);
         var wid = 90/N;
@@ -80,7 +83,7 @@ console.log(arr);
 cratebargraph(arr,50);
 
 
- async function bubbleSort(array){
+async function bubbleSort(array){
     let len = array.length;
     console.log(len);
     
@@ -108,6 +111,7 @@ cratebargraph(arr,50);
                 f=1;
             }
             await sleep(100);
+
             if(f===1){
                 console.log("swapping "+ arr[j-1]+arr[j]);
                 document.getElementById("val"+ind).style.background="-webkit-linear-gradient(top,rgba(0,0,0,0) "+val1+"%, rgb(var(--blue-crayola)) "+val1+"%)";
@@ -125,9 +129,58 @@ cratebargraph(arr,50);
         }
         
     }
-    console.log("done");
-
 }
+
+
+
+async function mergesort(array){
+    let len = array.length;
+    console.log(len);
+    
+    var myNode = document.querySelector(".sortgraph").childNodes;
+
+    for (let i = 1; i <= len; i++) {
+        
+        for (let j = 1; j <=len-i; j++) {
+            
+            
+            
+            var val2 = 100-((array[j])*100/len);
+            var val1 = 100-((array[j-1])*100/len);
+            
+            var f= 0;
+            var ind = j+1;
+
+
+            document.getElementById("val"+j).style.background="-webkit-linear-gradient(top,rgba(0,0,0,0) "+val1+"%, rgb(var(--minion-yellow)) "+val1+"%)";
+            document.getElementById("val"+ind).style.background="-webkit-linear-gradient(top,rgba(0,0,0,0) "+val2+"%, rgb(var(--minion-yellow)) "+val2+"%)";
+            if (array[j-1] > array[j]) {
+                let tmp = array[j-1];
+                array[j-1] = array[j];
+                array[j] = tmp;
+                f=1;
+            }
+            await sleep(100);
+            
+            if(f===1){
+                console.log("swapping "+ arr[j-1]+arr[j]);
+                document.getElementById("val"+ind).style.background="-webkit-linear-gradient(top,rgba(0,0,0,0) "+val1+"%, rgb(var(--blue-crayola)) "+val1+"%)";
+                document.getElementById("val"+j).style.background="-webkit-linear-gradient(top,rgba(0,0,0,0) "+val2+"%, rgb(var(--blue-crayola)) "+val2+"%)";
+            }else{
+                console.log(" not swapping "+ arr[j-1]+arr[j]);
+                document.getElementById("val"+ind).style.background="-webkit-linear-gradient(top,rgba(0,0,0,0) "+val2+"%, rgb(var(--blue-crayola)) "+val2+"%)";
+                document.getElementById("val"+j).style.background="-webkit-linear-gradient(top,rgba(0,0,0,0) "+val1+"%, rgb(var(--blue-crayola)) "+val1+"%)";
+            }
+            
+            
+
+
+            
+        }
+        
+    }
+}
+
 
 
 
