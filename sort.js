@@ -92,43 +92,67 @@ async function bubbleSort(array){
 }
 
 
+async function merge (arr1, arr2,leftStartIndex,rightStartIndex) {
+    let sorted = [],i=leftStartIndex,j=rightStartIndex;
+    let count=leftStartIndex;
+    
+    while (arr1.length && arr2.length) {
+        var val1 = 100-((arr1[0])*100/N);
+        var val2 = 100-((arr2[0])*100/N);
 
-// function merge (arr1, arr2) {
-//     let sorted = [];
-    
-//     while (arr1.length && arr2.length) {
-//         if (arr1[0] < arr2[0]) sorted.push(arr1.shift());
-//         else sorted.push(arr2.shift());
-//     };
+        updateBar(i+1,val1,mYellow);
+        updateBar(j+1,val2,mYellow);
+        
+        await sleep(100);
+        if (arr1[0] < arr2[0]){
+            sorted.push(arr1.shift());
+            updateBar(count+1,val1,blue);
+            count++;
+            i++;
+        } 
+        else{
+            sorted.push(arr2.shift());
+            updateBar(count+1,val1,blue);
+            count++;
+            j++;
+        } 
+    };
+    var res = sorted.concat(arr1.slice().concat(arr2.slice()));
+    if(i-1 == leftStartIndex){
+        while(arr2.length){
+            var val2 = 100-((arr2[0])*100/N);
+            updateBar(j+1,val2,mYellow);
+            await sleep(100);
+            updateBar(count+1,val2,blue);
+            count++;
+            j++;
+        }
+
+
+    }else{
+        while(arr1.length){
+            var val1 = 100-((arr1[0])*100/N);
+            updateBar(i+1,val1,mYellow);
+            await sleep(100);
+            updateBar(count+1,val1,blue);
+            count++;
+            i++;
+        }
+
+    }
 
     
-//     return sorted.concat(arr1.slice().concat(arr2.slice()));
-// }
-async function mergeSort(array){
-    // function merge(arr1, arr2) {
-    //     let sorted = [];
+    return res;
+}
+async function mergeSort(array,startIndex){
     
-    //     while (arr1.length && arr2.length) {
-    //     if (arr1[0] < arr2[0]) sorted.push(arr1.shift());
-    //     else sorted.push(arr2.shift());
-    //     };
-    //     return sorted.concat(arr1.slice().concat(arr2.slice()));
-    // };
     if (array.length <= 1) return array;
     let mid = Math.floor(array.length / 2),
-        left = await mergeSort(array.slice(0, mid)),
-        right = await mergeSort(array.slice(mid));
-    await sleep(100);
-    console.log('yo');
-    let sorted = [];
+        left = await mergeSort(array.slice(0, mid),startIndex),
+        right = await mergeSort(array.slice(mid),mid);
     
-    while (left.length && right.length) {
-        await sleep(100);
-        if (left[0] < right[0]) sorted.push(left.shift());
-        else sorted.push(right.shift());
-    };
     
-    return sorted.concat(left.slice().concat(right.slice()));;
+    return await merge(left,right,startIndex,mid);
     
 }
 
@@ -163,6 +187,53 @@ async function insertionSort(array){
     return array;
 }
 
+async function swap(items, leftIndex, rightIndex){
+    var temp = items[leftIndex];
+    items[leftIndex] = items[rightIndex];
+    items[rightIndex] = temp;
+}
+async function partition(items, left, right) {
+    var pivot   = items[Math.floor((right + left) / 2)],
+        i       = left,
+        j       = right;
+    while (i <= j) {
+        while (items[i] < pivot) {
+            i++;
+        }
+        while (items[j] > pivot) {
+            j--;
+        }
+        if (i <= j) {
+            var val1 = 100-((items[i])*100/N);
+            var val2 = 100-((items[j])*100/N);
+
+            updateBar(i+1,val1,mYellow);
+            updateBar(j+1,val2,mYellow);
+            await sleep(100);
+            await swap(items, i, j);
+            updateBar(i+1,val2,blue);
+            updateBar(j+1,val1,blue);
+            i++;
+            j--;
+        }
+    }
+    return i;
+}
+
+async function quickSort(items, left, right) {
+    var index;
+    if (items.length > 1) {
+        index = await partition(items, left, right); 
+        if (left < index - 1) {
+            await quickSort(items, left, index - 1);
+        }
+        if (index < right) { 
+            await quickSort(items, index, right);
+        }
+    }
+    return items;
+}
+
 
 
 //  Add event listeners to all choice buttons
@@ -193,7 +264,7 @@ slider.oninput = function(){
     boxp.textContent = this.value;
     slider.style.background = "-webkit-linear-gradient(left,rgb(var(--blue-crayola)) "+x+"%, rgba(var(--rich-black-fogra-29),0.2) "+x+"%)";
 }
-
+var N;
 // Create default array and graph
 var arr = [];
 for (var i = 1; i <= 50; i++) {
@@ -209,7 +280,7 @@ cratebargraph(arr,50);
 document.querySelector(".Startbtn").addEventListener("click",function(){
 
     
-    var N = slider.value;
+    N = slider.value;
     
     if(N==50){
        
@@ -237,8 +308,12 @@ document.querySelector(".Startbtn").addEventListener("click",function(){
             console.log("finished");
           })()
        }
-
+       
        if(opt=="s2"){
+        (async () => {
+            console.log(await mergeSort(arr,0))
+            console.log("finished");
+          })()
         
         }
         if(opt=="s3"){
@@ -248,7 +323,10 @@ document.querySelector(".Startbtn").addEventListener("click",function(){
               })()
         }
         if(opt=="s4"){
-
+            (async () => {
+                console.log(await quickSort(arr,0,arr.length - 1));
+                console.log("finished");
+              })()
         }
 
 
