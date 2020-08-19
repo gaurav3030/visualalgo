@@ -103,45 +103,41 @@ async function merge (arr1, arr2,leftStartIndex,rightStartIndex) {
         updateBar(i+1,val1,mYellow);
         updateBar(j+1,val2,mYellow);
         
-        await sleep(100);
+        
         if (arr1[0] < arr2[0]){
             sorted.push(arr1.shift());
-            updateBar(count+1,val1,blue);
+            updateBar(i+1,val1,blue);
             count++;
             i++;
         } 
         else{
             sorted.push(arr2.shift());
-            updateBar(count+1,val1,blue);
+            updateBar(j+1,val2,blue);
             count++;
             j++;
         } 
     };
     var res = sorted.concat(arr1.slice().concat(arr2.slice()));
-    if(i-1 == leftStartIndex){
-        while(arr2.length){
-            var val2 = 100-((arr2[0])*100/N);
-            updateBar(j+1,val2,mYellow);
-            await sleep(100);
-            updateBar(count+1,val2,blue);
-            count++;
-            j++;
-        }
-
-
-    }else{
-        while(arr1.length){
-            var val1 = 100-((arr1[0])*100/N);
-            updateBar(i+1,val1,mYellow);
-            await sleep(100);
-            updateBar(count+1,val1,blue);
-            count++;
-            i++;
-        }
-
+    while(arr1.length){
+        var val = 100-((arr1[0])*100/N);
+        updateBar(i+1,val,mYellow);
+        sorted.push(arr1.shift());
+        updateBar(i+1,val,blue);
+        i++;
     }
-
-    
+    while(arr2.length){
+        var val = 100-((arr2[0])*100/N);
+        updateBar(j+1,val,mYellow);
+        sorted.push(arr2.shift());
+        updateBar(j+1,val,blue);
+        j++;
+    }
+    for(let i=0;i<res.length;i++){
+        var val = 100-((res[i])*100/N);
+        updateBar(i+leftStartIndex+1,val,mYellow);
+        await sleep(100);
+        updateBar(i+leftStartIndex+1,val,blue);
+    }
     return res;
 }
 async function mergeSort(array,startIndex){
@@ -149,10 +145,10 @@ async function mergeSort(array,startIndex){
     if (array.length <= 1) return array;
     let mid = Math.floor(array.length / 2),
         left = await mergeSort(array.slice(0, mid),startIndex),
-        right = await mergeSort(array.slice(mid),mid);
+        right = await mergeSort(array.slice(mid),startIndex+mid);
     
     
-    return await merge(left,right,startIndex,mid);
+    return await merge(left,right,startIndex,startIndex+mid);
     
 }
 

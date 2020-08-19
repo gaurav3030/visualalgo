@@ -219,9 +219,10 @@ body{
     background-color: rgb(var(--blue-crayola));
 }
 .cent{
-    width: 80%;
+    width: 85%;
     display: block;
     margin: auto;
+    
 }
 .box{
     height: 20px;
@@ -231,6 +232,7 @@ body{
     border-radius: 0 50% 50% 50%;
     transform:rotate(-135deg);
     left: 50%;
+    
     transform: translateX(-50%) rotate(-135deg);
     
 }
