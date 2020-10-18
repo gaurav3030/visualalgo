@@ -1,22 +1,3 @@
-var seconds = 0, minutes = 0, hours = 0,t;
-function add() {
-    seconds++;
-    if (seconds >= 60) {
-        seconds = 0;
-        minutes++;
-        if (minutes >= 60) {
-            minutes = 0;
-            hours++;
-        }
-    }
-    
-    document.getElementById("timer").textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
-
-    timer();
-}
-function timer() {
-    t = setTimeout(add, 1000);
-}
 
 // just some functions at first  
 
@@ -292,10 +273,9 @@ cratebargraph(arr,50);
 
 
 //Add event listener to Start button
-document.querySelector(".Startbtn").addEventListener("click",async function(){
-    document.getElementById("timer").textContent = "00:00:00";
-    seconds = 0; minutes = 0; hours = 0;
-    timer();
+document.querySelector(".Startbtn").addEventListener("click",function(){
+
+    
     N = slider.value;
     
     if(N==50){
@@ -322,7 +302,6 @@ document.querySelector(".Startbtn").addEventListener("click",async function(){
         (async () => {
             console.log(await bubbleSort(arr))
             console.log("finished");
-            clearTimeout(t);
           })()
        }
        
@@ -330,7 +309,6 @@ document.querySelector(".Startbtn").addEventListener("click",async function(){
         (async () => {
             console.log(await mergeSort(arr,0))
             console.log("finished");
-            clearTimeout(t);
           })()
         
         }
@@ -338,21 +316,19 @@ document.querySelector(".Startbtn").addEventListener("click",async function(){
             (async () => {
                 console.log(await insertionSort(arr))
                 console.log("finished");
-                clearTimeout(t);
               })()
         }
         if(opt=="s4"){
             (async () => {
                 console.log(await quickSort(arr,0,arr.length - 1));
                 console.log("finished");
-                clearTimeout(t);
               })()
         }
 
-        
+
        
      //  arr=mergeSort(arr);
-     
+       
      
       
     
